@@ -28,17 +28,18 @@ describe 'Dogebot', ->
       expect(dogebot.slug).to.be('Doge-bot')
 
     it 'polls exchanges for doge/btc/usd exchange rates', ->
-      dogeBtcUrl = "https://data.bter.com/api/1/ticker/doge_btc"
+      dogeBtcUrl = "https://poloniex.com/public?command=returnTicker"
       btcUsdUrl  = "https://www.bitstamp.net/api/ticker/"
 
       dogeBtcResp =
         statusCode: 200
         body:
-          result: "true"
-          last:   "0.00000069"
-          high:   "0.00000073"
-          low:    "0.00000065"
-          avg:    "0.00000070"
+          BTC_DOGE:
+            result: "true"
+            last:   "0.00000069"
+            high:   "0.00000073"
+            low:    "0.00000065"
+            avg:    "0.00000070"
 
       btcUsdResp =
         statusCode: 200
@@ -65,7 +66,7 @@ describe 'Dogebot', ->
       @robot.http = httpStub
 
       dogebot = new Dogebot(@robot)
-      expect(dogebot.doge_btc).to.eql(parseFloat(dogeBtcResp.body.last))
+      expect(dogebot.doge_btc).to.eql(parseFloat(dogeBtcResp.body.BTC_DOGE.last))
       expect(dogebot.btc_usd).to.eql(parseFloat(btcUsdResp.body.last))
 
     it.skip 'updates doge/btc/usd exchange rates at intervals'

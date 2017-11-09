@@ -14,7 +14,7 @@ class Dogebot
   constructor: (@robot) ->
     @slug = @robot.name.replace(/[^a-zA-Z0-9 -]/g, '').replace(/\W+/g, '-')
 
-    _dogeBtcApiUrl = "https://data.bter.com/api/1/ticker/doge_btc"
+    _dogeBtcApiUrl = "https://poloniex.com/public?command=returnTicker"
     _btcUsdAPIUrl  = "https://www.bitstamp.net/api/ticker/"
     @doge_btc = 0
     @btc_usd  = 0
@@ -31,7 +31,7 @@ class Dogebot
             # TODO: Handle parse error here
            return
 
-          @doge_btc = parseFloat(data.last)
+          @doge_btc = parseFloat(data.BTC_DOGE.last)
 
       # Poll for btc to usd
       @robot.http(_btcUsdAPIUrl)
