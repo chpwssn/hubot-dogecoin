@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.0.7 - 2017-11-09
+* Use Poloniex API for polling BTC:DOGE rate
+
 ## v0.0.6 - 2014-05-28
 
 * Add pollers for doge to btc and btc to usd rates
